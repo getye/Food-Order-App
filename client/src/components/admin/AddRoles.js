@@ -64,7 +64,7 @@ const handleSubmit = async (event) => {
       <RoleTable handleOpen={handleOpen} />
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle sx={{ textAlign: 'center' }}>Role</DialogTitle>
+        <DialogTitle>Add Role</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -72,6 +72,7 @@ const handleSubmit = async (event) => {
             label="Role Name"
             name='roleName'
             type="text"
+            size='small'
             fullWidth
             value={roleData.roleName}
             onChange={handleInputChange}
@@ -80,7 +81,7 @@ const handleSubmit = async (event) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} sx={{ bgcolor: 'red', color: 'white', textTransform: 'none' }}>Cancel</Button>
-          <Button onClick={handleSubmit} sx={{ bgcolor: '#FF8C00', color: 'white', textTransform: 'none' }}>Add</Button>
+          <Button onClick={handleSubmit} sx={{ bgcolor: '#FF8C00', color: 'white', fontWeight:'bold', textTransform: 'none' }}>Add</Button>
         </DialogActions>
       </Dialog>
 

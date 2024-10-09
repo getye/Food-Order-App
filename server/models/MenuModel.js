@@ -74,6 +74,22 @@ const managerViewMenus = async (restaurant) => {
   return await pool.query(query, Value);
 };
 
+const reports = async (restaurant) => {
+  const query = `
+    SELECT 
+      TO_CHAR(TO_TIMESTAMP(created_at, 'HH24:MI MM/DD/YYYY'), 'YYYY-MM') AS month, 
+      COUNT(order_id) AS total_orders, 
+      SUM(price::numeric * quantity) AS total_earnings 
+    FROM orders 
+    WHERE restaurant = $1 
+    GROUP BY month 
+    ORDER BY month;
+  `;
+  const values = [restaurant];
+  return await pool.query(query, values);
+};
+
+
 
 
 module.exports = { 
@@ -85,4 +101,5 @@ module.exports = {
     managerViewOrdersWithCustomers,
     updateOrderStatus,
     managerViewMenus,
+    reports,
 };

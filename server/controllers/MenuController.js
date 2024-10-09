@@ -128,6 +128,26 @@ const managerViewMenus = async (req, res) => {
   }
 };
 
+const reports = async (req, res) => {
+  const manager_id = req.user.userId;
+
+  try {
+
+      // Retrieve the Manager's restaurant
+    const restaurantName = await UserModel.getAdminRestaurant(manager_id);
+
+    if (!restaurantName) {
+      return res.status(404).json({ message: "Manager restaurant not found" });
+    }
+    const report = await MenuModel.reports(restaurantName);
+    console.log(report)
+    res.json(report.rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Error retrieving order reports" });
+  }
+};
+
 
 module.exports = {
     addMenu,
@@ -137,5 +157,6 @@ module.exports = {
     managerViewOrders,
     updateOrderStatus,
     managerViewMenus,
+    reports,
 
 };

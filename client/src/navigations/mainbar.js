@@ -17,6 +17,8 @@ import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import LocalPizzaOutlinedIcon from '@mui/icons-material/LocalPizzaOutlined';
+import SummarizeIcon from '@mui/icons-material/Summarize';
+
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { Divider, MenuItem, Link } from '@mui/material';
@@ -136,7 +138,15 @@ export const MainBar = (props) => {
       {/* Restaurant Register/Admin Links */}
       {userRole === "Restaurant Register" && (
         <>
-        <ListItem disablePadding onClick={() => { navigate("admin/roles") }}>
+        <ListItem disablePadding onClick={() => { navigate("admin/reports") }}>
+            <ListItemButton>
+              <ListItemIcon>
+                <SummarizeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Reports" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding onClick={() => { navigate("admin/roles") }}>
             <ListItemButton>
               <ListItemIcon>
                 <Person2OutlinedIcon />

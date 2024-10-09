@@ -14,6 +14,7 @@ export const defineAbilitiesFor = () => {
       can('create', 'User');
       can('create', 'Role');
       can('update', 'Profile');
+      can('view', 'Reports');
       break;
     case 'Kitchen Manager':
       can('view', 'Menu');

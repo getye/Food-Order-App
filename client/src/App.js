@@ -24,6 +24,7 @@ import { Can } from '@casl/react';
 import React, { useContext } from 'react';
 import { Unauthorized } from './components/unauthorized';
 import { OrdersInfo } from './components/cashier/orders';
+import { Report } from './components/admin/Report';
 
 const ProtectedRoute = ({ action, subject, element }) => {
   const ability = useContext(AbilityContext);
@@ -53,6 +54,10 @@ function App() {
             <Route
               path="/admin/users"
               element={<ProtectedRoute action="create" subject="User" element={<ViewUsers />} />}
+            />
+            <Route
+              path="/admin/reports"
+              element={<ProtectedRoute action="view" subject="Reports" element={<Report />} />}
             />
             <Route
               path="/admin/roles"
