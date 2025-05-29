@@ -68,9 +68,9 @@ const handleSubmit = async () => {
         handleSubmit={handleSubmit}
       />
 
-    <Snackbar
+      <Snackbar
         open={showNotification}
-        autoHideDuration={6000}
+        autoHideDuration={500}
         onClose={() => setShowNotification(false)}
         anchorOrigin={{
             vertical: 'top',
@@ -84,7 +84,7 @@ const handleSubmit = async () => {
         >
             {notificationMessage}
         </Alert>
-    </Snackbar>
+      </Snackbar>
     </Box>
   );
 };

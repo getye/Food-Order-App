@@ -159,7 +159,7 @@ const addUser = async (req, res) => {
 
     await sendEmail(email, emailSubject, emailText);  // Send the email
 
-    res.status(201).json({ message: "Registered Successfully and email sent", password });  // Optionally include the password in the response for debugging
+    res.status(201).json({ message: "Registered Successfully and email sent", password });  
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Error, not registered" });
@@ -195,7 +195,10 @@ const deleteUser = async (req, res) => {
   try {
     await UserModel.deleteUser(user_email);
 
-   res.status(201).json({ message: 'User deleted successfully' });
+    if(!user_email){
+      res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json({ message: 'User deleted successfully' });
     
   } catch (err) {
     console.error('Error:', err);

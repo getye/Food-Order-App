@@ -4,7 +4,10 @@ import { z } from 'zod';
 
 // Zod schema for validation
 const userSchema = z.object({
-  userName: z.string().min(1, "User Name is required"),
+  userName: z
+    .string()
+    .min(1, "User Name is required")
+    .regex(/^\+?[aA-zZ]+$/, "User-name should be string"),
   email: z.string().email("Invalid email address"),
   location: z.string().min(1, "Location is required"),
   phone: z
@@ -48,7 +51,7 @@ export const AddAdminModal = ({ open, handleClose, newUser, handleInputChange, h
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Add New Admin</DialogTitle>
+      <DialogTitle>Add a new Admin</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
@@ -126,12 +129,12 @@ export const AddAdminModal = ({ open, handleClose, newUser, handleInputChange, h
               bgcolor: 'red',
               opacity: 0.9,
             },
-          }}
-        >
+          }}>
           Cancel
         </Button>
         <Button
           onClick={handleFormSubmit}
+          type="submit"
           sx={{
             bgcolor: '#FF8C00',
             color: 'white',
@@ -140,8 +143,7 @@ export const AddAdminModal = ({ open, handleClose, newUser, handleInputChange, h
               bgcolor: '#FF6700',
               opacity: 0.9,
             },
-          }}
-        >
+          }}>
           Add
         </Button>
       </DialogActions>

@@ -12,12 +12,13 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
+import { Link as RouteLink } from 'react-router-dom';
+
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import LocalPizzaOutlinedIcon from '@mui/icons-material/LocalPizzaOutlined';
-import SummarizeIcon from '@mui/icons-material/Summarize';
 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -106,7 +107,7 @@ export const MainBar = (props) => {
 
   const handleSignOut = () => {
     localStorage.clear();
-    navigate('/')
+    navigate('/signin')
   };
   const drawer = (
     <List sx={{ height: "100%", borderColor: 'gray' }}>
@@ -138,23 +139,23 @@ export const MainBar = (props) => {
       {/* Restaurant Register/Admin Links */}
       {userRole === "Restaurant Register" && (
         <>
-        <ListItem disablePadding onClick={() => { navigate("admin/reports") }}>
+        <ListItem component={RouteLink} to="/admin/reports" disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <SummarizeIcon />
+                <SpaceDashboardIcon />
               </ListItemIcon>
-              <ListItemText primary="Reports" />
+              <ListItemText primary="Dashboard" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding onClick={() => { navigate("admin/roles") }}>
-            <ListItemButton>
+          <ListItem component={RouteLink} to = "/admin/roles" disablePadding>
+            <ListItemButton id = "role">
               <ListItemIcon>
                 <Person2OutlinedIcon />
               </ListItemIcon>
               <ListItemText primary="Role" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding onClick={() => { navigate("admin/users") }}>
+          <ListItem component={RouteLink} to = "/admin/users" disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 <AccountCircleOutlinedIcon />
@@ -169,7 +170,7 @@ export const MainBar = (props) => {
       {/* Kichen manager Links */}
       {userRole === "Kitchen Manager" && (
         <>
-          <ListItem disablePadding sx={{ display: "block" }} onClick={() => { navigate("kichen-manager/dashboard") }}>
+          <ListItem component={RouteLink} to = "/kichen-manager/dashboard"  disablePadding >
             <ListItemButton>
               <ListItemIcon>
                 <SpaceDashboardIcon />
@@ -200,6 +201,14 @@ export const MainBar = (props) => {
       {/* Branch manager Links */}
       {userRole === 'Branch Manager' && (
         <>
+        <ListItem component={RouteLink} to="/admin/reports" disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <SpaceDashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItemButton>
+          </ListItem>
           <ListItem disablePadding onClick={() => { navigate("branch-manager/dashboard") }}>
             <ListItemButton>
               <ListItemIcon>
@@ -222,7 +231,7 @@ export const MainBar = (props) => {
       )}
 
             {/* Cashier Links */}
-            {userRole === 'Cashier' && (
+        {userRole === 'Cashier' && (
         <>
           <ListItem disablePadding onClick={() => { navigate("cashier/view/orders") }}>
             <ListItemButton>
@@ -238,7 +247,7 @@ export const MainBar = (props) => {
        {/* Customer Links */}
        {userRole === 'Customer' && (
         <>
-          <ListItem disablePadding onClick={() => { navigate("customer/view/orders") }}>
+          <ListItem component={RouteLink} to = "/customer/view/orders" disablePadding >
             <ListItemButton>
               <ListItemIcon>
                 <SpaceDashboardIcon />
@@ -247,7 +256,7 @@ export const MainBar = (props) => {
             </ListItemButton>
           </ListItem>
 
-          <ListItem disablePadding onClick={() => { navigate("customer/menu") }}>
+          <ListItem component={RouteLink} to = "/customer/menu" disablePadding >
             <ListItemButton>
               <ListItemIcon>
                 <LocalPizzaIcon />
@@ -260,7 +269,7 @@ export const MainBar = (props) => {
       )}
       <Divider/>
         <ListItem disablePadding onClick={ handleSignOut } sx={{maxWidth:'80%', marginLeft:3, paddingTop:2}}>
-            <ListItemButton sx={{marginLeft:2}}>
+            <ListItemButton id='logout' sx={{marginLeft:2}}>
               <ListItemIcon>
                 <LoginOutlinedIcon sx={{color:'red'}}/>
               </ListItemIcon>
@@ -282,7 +291,7 @@ export const MainBar = (props) => {
             <Toolbar sx={{ justifyContent: 'space-between' }}>
               <img src={pizza} alt='Pizza' />
               <MenuItem onClick={() => navigate('/')}>Home</MenuItem>
-              <MenuItem onClick={() => navigate('/orders')}>Orders</MenuItem>
+              <MenuItem onClick={() => navigate('/orders')}>Menu</MenuItem>
               <MenuItem onClick={() => navigate('/contact')}>Who we are</MenuItem>
               <MenuItem
                 onClick={() => navigate('/signup')}

@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 const roleModel = require('../models/roleModel');
 const { generateTokens } = require('../utils/jwt.helper'); 
+const { now } = require('sequelize/lib/utils');
 
 const addRole = async (req, res) => {
   const id = uuidv4();
@@ -13,7 +14,7 @@ const addRole = async (req, res) => {
     const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
     const day = String(today.getDate()).padStart(2, '0');
     const year = today.getFullYear();
-    const created_at = `${month}/${day}/${year}`;
+    const created_at = now();
 
   try {
     await roleModel.addRole(id, roleName, permissions, created_at, role_status);
@@ -56,7 +57,7 @@ const deleteRole = async (req, res) => {
     try {
       await roleModel.deleteRole(role_id);
   
-     res.status(201).json({ message: 'Role deleted successfully' });
+     res.status(200).json({ message: 'Role deleted successfully' });
       
     } catch (err) {
       console.error('Error:', err);

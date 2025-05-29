@@ -33,28 +33,32 @@ const handlePermissionChange = (event) => {
 
 const handleSubmit = async (event) => {
     event.preventDefault();
+    if(roleData.roleName === '' || Object.keys(roleData.permissions).length === 0){
+      setNotificationMessage('Role name or Permission is empty')
+      setShowNotification(true)
+    }else{
+      try {
+        const response = await Axios.post('http://localhost:8001/admin/add/roles', roleData);
+        console.log("Response:", response.data.message);
 
-    try {
-      const response = await Axios.post('http://localhost:8001/admin/add/roles', roleData);
-      console.log("Response:", response.data.message);
-
-      if (response.status === 201) {
-        setNotificationMessage('Successfully registered');
-        setShowNotification(true);
-        setRoleData({ roleName: '', permissions: {} }); // Reset form
-      } else {
-        setNotificationMessage('Error in registration');
-        setShowNotification(true);
-      }
-    } catch (err) {
-      if (err.response) {
-        const errorMessage = err.response.data.message;
-        setNotificationMessage(errorMessage);
-        setShowNotification(true);
-      } else {
-        setNotificationMessage('An unexpected error occurred');
-        setShowNotification(true);
-        console.error(err);
+        if (response.status === 201) {
+          setNotificationMessage('Successfully registered');
+          setShowNotification(true);
+          setRoleData({ roleName: '', permissions: {} }); // Reset form
+        } else {
+          setNotificationMessage('Error in registration');
+          setShowNotification(true);
+        }
+      } catch (err) {
+        if (err.response) {
+          const errorMessage = err.response.data.message;
+          setNotificationMessage(errorMessage);
+          setShowNotification(true);
+        } else {
+          setNotificationMessage('An unexpected error occurred');
+          setShowNotification(true);
+          console.error(err);
+        }
       }
     }
   };
@@ -81,7 +85,7 @@ const handleSubmit = async (event) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} sx={{ bgcolor: 'red', color: 'white', textTransform: 'none' }}>Cancel</Button>
-          <Button onClick={handleSubmit} sx={{ bgcolor: '#FF8C00', color: 'white', fontWeight:'bold', textTransform: 'none' }}>Add</Button>
+          <Button id='add' onClick={handleSubmit} sx={{ bgcolor: '#FF8C00', color: 'white', fontWeight:'bold', textTransform: 'none' }}>Add</Button>
         </DialogActions>
       </Dialog>
 

@@ -72,9 +72,14 @@ const updatePassword = async (user_id, password) => {
 const deleteUser = async (user_email) => {
   
   try{
-  const result = await pool.query(
-          'DELETE FROM users WHERE user_email = $1 RETURNING *',
-          [user_email]
+      await pool.query(
+              'DELETE FROM accounts WHERE user_email = $1 RETURNING *',
+              [user_email]
+      );
+
+      const result = await pool.query(
+              'DELETE FROM users WHERE user_email = $1 RETURNING *',
+              [user_email]
       );
       return result;
   }catch(err){
