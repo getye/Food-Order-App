@@ -110,6 +110,7 @@ export const Menus = () => {
                   <sup>Birr</sup>
                 </Typography>
                 <Button
+                  id = "order"
                   onClick={() => handleOpen(menu)} // Open modal on button click
                   sx={{ bgcolor: '#FF8C00', color: 'white', fontWeight: 'bold', marginLeft: 1, pl: 2, pr: 2, borderRadius: 2, textTransform: 'none' }}
                 >

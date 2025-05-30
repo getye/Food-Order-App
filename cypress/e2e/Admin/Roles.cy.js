@@ -1,19 +1,14 @@
+beforeEach(() => {
+    cy.visit('http://localhost:3000/signin')
+    cy.get('input[name="email"]').type('getye2008@gmail.com')
+    cy.get('input[name="password"]').type('getyepass123')
+    cy.get('button[type="submit"]').click()
+
+    cy.url().should('eq', 'http://localhost:3000/admin/users')
+    cy.contains('Add User')
+})
 
 describe('view roles', () => {
-    beforeEach(() => {
-        cy.visit('http://localhost:3000/signin')
-        cy.get('input[name="email"]').type('getye2008@gmail.com')
-        cy.get('input[name="password"]').type('getyepass123')
-        cy.get('button[type="submit"]').click()
-
-        cy.url().should('eq', 'http://localhost:3000/admin/users')
-        cy.contains('Add User')
-
-        // open role tab on the left menu
-        cy.get('#role').click();
-        cy.url().should('eq', 'http://localhost:3000/admin/roles')
-    })
-
     it('should get roles', () =>{
         
         // Check that the roles are displayed in the table
@@ -25,16 +20,6 @@ describe('view roles', () => {
 })
 
 describe('add role', () => {
-    beforeEach(() => {
-        cy.visit('http://localhost:3000/signin')
-        cy.get('input[name="email"]').type('getye2008@gmail.com')
-        cy.get('input[name="password"]').type('getyepass123')
-        cy.get('button[type="submit"]').click()
-
-        cy.url().should('eq', 'http://localhost:3000/admin/users')
-        cy.contains('Add User')
-    })
-
     it('should add a new role', () => {
         // open role tab on the left menu
         cy.get('#role').click();
@@ -57,10 +42,10 @@ describe('add role', () => {
 
         // click the Add button and asstert the role is added successfully
         cy.get('button[id="add"]').contains('Add').click()
-        cy.get('[role="alert"]').should('contain.text', 'Successfully registered');
+        cy.get('[role="alert"]').should('contain.text', 'Successfully registered')
     })
 
-    it('should not add with invalid data', () => {
+    it('should not add role with empty role name or permission', () => {
         /**
          * role name is empty
          * no checked permissions

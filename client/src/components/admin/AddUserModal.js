@@ -153,6 +153,7 @@ export const AddUserModal = ({ open, handleClose, newUser, handleInputChange, ha
           Cancel
         </Button>
         <Button
+          id = "add-user"
           onClick={handleFormSubmit}
           sx={{
             bgcolor: '#FF8C00',

@@ -39,7 +39,6 @@ const handleSubmit = async (event) => {
     }else{
       try {
         const response = await Axios.post('http://localhost:8001/admin/add/roles', roleData);
-        console.log("Response:", response.data.message);
 
         if (response.status === 201) {
           setNotificationMessage('Successfully registered');

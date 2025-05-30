@@ -15,15 +15,15 @@ import pizza from '../assets/pizza.png';
 
 
 const signupSchema = z.object({
-  email: z.string().email('Invalid email address').nonempty('Email is required'),
+  email: z.string().email('Invalid email address').min(5, 'Email is required'),
   password: z.string().min(8, 'Password must be at least 8 characters long'),
   confirmPassword: z.string().min(8, 'Confirm Password must be at least 8 characters long'),
   location: z.string().min(1, 'Location is required'),
   phone: z
-  .string()
-  .min(10, "Phone number must be at least 10 digits")
-  .max(15, "Phone number can't exceed 15 digits")
-  .regex(/^\+?[0-9]+$/, "Phone number should only contain digits and can start with +"),
+    .string()
+    .min(10, "Phone number must be at least 10 digits")
+    .max(15, "Phone number can't exceed 15 digits")
+    .regex(/^\+?[0-9]+$/, "Phone number should only contain digits and can start with +"),
 }).refine(data => data.password === data.confirmPassword, {
   message: 'Passwords must match',
   path: ['confirmPassword'],
@@ -115,27 +115,28 @@ export const Signup = () => {
           <Box sx={{ paddingLeft: 0, width: '80%' }}>
             <img src={pizza} alt='Pizza' />
             <TextField
-              size="small"
-              sx={{ paddingBottom: 1 }}
-              type="email"
-              name="email"
-              value={formValues.email}
+              id = 'email'
+              size ="small"
+              sx = {{ paddingBottom: 1 }}
+              type= "email"
+              name = "email"
+              value = {formValues.email}
               onChange={handleChange}
               label="Email"
-              required
+              
               fullWidth
               error={Boolean(errors.email)}
               helperText={errors.email?.[0]}
             />
             <FormControl size='small' sx={{ paddingBottom: 1, width: '100%' }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+              <InputLabel htmlFor="password">Password</InputLabel>
               <OutlinedInput
-                id="outlined-adornment-password"
+                id="password"
                 type={showPassword ? 'text' : 'password'}
                 name="password"
                 value={formValues.password}
                 onChange={handleChange}
-                required
+                
                 fullWidth
                 autoComplete='off'
                 endAdornment={
@@ -156,14 +157,13 @@ export const Signup = () => {
               {errors.password && <Typography color="error">{errors.password?.[0]}</Typography>}
             </FormControl>
             <FormControl size='small' sx={{ width: '100%', paddingBottom: 1 }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-confirm">Confirm Password</InputLabel>
+              <InputLabel htmlFor="confirm">Confirm Password</InputLabel>
               <OutlinedInput
-                id="outlined-adornment-confirm"
+                id="confirm"
                 type={showConfirm ? 'text' : 'password'}
                 name="confirmPassword"
                 value={formValues.confirmPassword}
                 onChange={handleChange}
-                required
                 autoComplete='off'
                 endAdornment={
                   <InputAdornment position="end">
@@ -184,48 +184,51 @@ export const Signup = () => {
             </FormControl>
             <TextField
               size="small"
+              id = 'phone'
               sx={{ paddingBottom: 1 }}
               type="text"
               name="phone"
               value={formValues.phone}
               onChange={handleChange}
               label="Phone Number"
-              required
               fullWidth
               error={Boolean(errors.phone)}
               helperText={errors.phone?.[0]}
             />
             <TextField
               size="small"
+              id = 'location'
               sx={{ paddingBottom: 1 }}
               type="text"
               name="location"
               value={formValues.location}
               label="Location"
-              required
               fullWidth
               onChange={handleChange}
               error={Boolean(errors.location)}
               helperText={errors.location?.[0]}
             />
             <FormControlLabel
-              control={<Checkbox value="accept" color="primary" />}
+              control={<Checkbox id="terms" value="accept" color="primary" />}
               label="I accept terms and conditions" required
               fullWidth
             />
-            <Button type="submit" fullWidth size='small' 
-            sx={{
-              bgcolor:'#FF8C00', 
-              paddingLeft:3,
-              paddingRight:3,
-              borderRadius:1,
-              color:'white',
-              textTransform: 'none',
-              '&:hover': {
-                      bgcolor: '#FF6700',
-                      opacity: 0.9,
-                    },}}>
-              Sign up
+            <Button 
+              type="submit" 
+              id='sign-up'
+              fullWidth size='small' 
+              sx={{
+                bgcolor:'#FF8C00', 
+                paddingLeft:3,
+                paddingRight:3,
+                borderRadius:1,
+                color:'white',
+                textTransform: 'none',
+                '&:hover': {
+                        bgcolor: '#FF6700',
+                        opacity: 0.9,
+                      },}}>
+                Sign up
             </Button>
             <Typography component="h5">
               Have an account? <Link href="/signin">Sign in</Link>

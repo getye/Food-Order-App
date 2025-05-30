@@ -28,7 +28,7 @@ describe('Add Restuarant Admins', () => {
         // Click the "Add" button
         cy.get('button[type="submit"]').contains('Add').click()
 
-        cy.get('[role="alert"]', { timeout: 10000 }).should('contain.text', 'User Successfully Added');
+        cy.get('[role="alert"]', { timeout: 6000 }).should('contain.text', 'User Successfully Added');
 
     });
 
