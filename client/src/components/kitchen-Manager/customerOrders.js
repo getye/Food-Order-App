@@ -208,6 +208,7 @@ export const CustomerOrders = () => {
                     Cancel
                   </Button>
                   <Button
+                    id="update"
                     onClick={handleStatusUpdate}
                     sx={{
                       bgcolor: '#FF8C00',

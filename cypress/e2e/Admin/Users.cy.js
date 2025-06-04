@@ -22,15 +22,15 @@ describe('add a new user', () => {
         cy.get('button').contains('Add User').click()
         
         // fill the form
-        cy.get('input[name="userName"]').type('Test')
-        cy.get('input[name="email"]').type('test@test.com')
+        cy.get('input[name="userName"]').type('Abebe')
+        cy.get('input[name="email"]').type('k.m11@test.com')
         cy.get('input[name="location"]').type('Addis Ababa')
-        cy.get('input[name="phone"]').type('+251912456879')
+        cy.get('input[name="phone"]').type('+251947456879')
 
         // select role
         cy.get('#role-select').click() // click on the select box
-        cy.get('li').contains('Casheir').click() // select "Casheir"
-        cy.get('#role-select').should('have.text', 'Casheir')  // check "Casheir" display on select box
+        cy.get('li').contains('Kitchen Manager').click() // select "Casheir"
+        cy.get('#role-select').should('have.text', 'Kitchen Manager')  // check "Casheir" display on select box
 
         cy.get('#add-user').click()
         cy.get('[role="alert"]').should('contain.text', 'User Successfully Added');

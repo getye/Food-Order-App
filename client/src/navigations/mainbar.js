@@ -179,7 +179,7 @@ export const MainBar = (props) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding sx={{ display: "block" }} onClick={() => { navigate("kichen-manager/add/menu") }}>
-            <ListItemButton>
+            <ListItemButton id="add-menu">
               <ListItemIcon>
                 <LocalPizzaOutlinedIcon />
               </ListItemIcon>
@@ -188,7 +188,7 @@ export const MainBar = (props) => {
           </ListItem>
 
           <ListItem disablePadding onClick={() => { navigate("kichen-manager/view/orders") }}>
-            <ListItemButton>
+            <ListItemButton id="orders">
               <ListItemIcon>
               <img src={liftIcon} alt='Pizza' width={40} />
               </ListItemIcon>

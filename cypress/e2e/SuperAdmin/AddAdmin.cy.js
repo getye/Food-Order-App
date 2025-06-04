@@ -17,7 +17,7 @@ describe('Add Restuarant Admins', () => {
         // Fill out form fields
         cy.get('input[name="userName"]').type('Abebe')
         cy.get('input[name="email"]').type('abe@example.com')
-        cy.get('input[name="phone"]').type('0912345678');
+        cy.get('input[name="phone"]').type('0912345678')
         cy.get('input[name="restaurant"]').type('Pizza Palace')
         cy.get('input[name="location"]').type('Addis Ababa')
 
@@ -28,7 +28,7 @@ describe('Add Restuarant Admins', () => {
         // Click the "Add" button
         cy.get('button[type="submit"]').contains('Add').click()
 
-        cy.get('[role="alert"]', { timeout: 6000 }).should('contain.text', 'User Successfully Added');
+        cy.get('[role="alert"]').should('contain.text', 'User Successfully Added');
 
     });
 
@@ -49,16 +49,16 @@ describe('Add Restuarant Admins', () => {
         // Fill out form fields
         cy.get('input[name="userName"]').type(111)
         cy.get('input[name="email"]').type('test')
-        cy.get('input[name="phone"]').type('test');
+        cy.get('input[name="phone"]').type('test')
         cy.get('input[name="restaurant"]').type('test')
         cy.get('input[name="location"]').type(1111)
 
         // Click the "Add" button
         cy.get('button[type="submit"]').contains('Add').click()
         
-        cy.contains('Invalid email address').should('be.visible');
-        cy.contains('Phone number should only contain digits and can start with +').should('be.visible');
-        cy.contains('User-name should be string').should('be.visible');
+        cy.contains('Invalid email address').should('be.visible')
+        cy.contains('Phone number should only contain digits and can start with +').should('be.visible')
+        cy.contains('User-name should be string').should('be.visible')
     });
 });
 
