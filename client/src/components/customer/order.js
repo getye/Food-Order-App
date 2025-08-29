@@ -56,7 +56,6 @@ export const Order = () => {
   );
 
   const handleRowClick = (row) => {
-    console.log('Row clicked:', row); // Debugging: Ensure row click works
     setSelectedOrder(row.original); // Set selected order data
     setOpenModal(true); // Open modal
   };

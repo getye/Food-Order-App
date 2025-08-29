@@ -36,8 +36,8 @@ describe('Place Order', () => {
 
         // Check for success alert message
         cy.get('.MuiAlert-message')
-          .should('be.visible')
-          .and('contain.text', 'Your Order is Successfully Submited')
+            .should('be.visible')
+            .and('contain.text', 'Your Order is Successfully Submited')
     })
 })
 

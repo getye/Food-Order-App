@@ -62,37 +62,42 @@ export const AddMenu = () => {
     formData.append("price", menuData.price);
     formData.append("picture", menuData.picture);
 
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        console.log("No token found, please log in");
-        return;
-      }
-      const response = await fetch(
-        "http://localhost:8001/kitchen-manager/add/menu",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
-        }
-      );
-      if (response.ok) {
-        setMessageType("Success");
-        setNotificationMessage("Menu Successfully Added");
-        setShowNotification(true);
-        setMenuData({ menuName: "", toppings: [], price: "", picture: null }); // Reset form
-      } else {
-        setMessageType("Error");
-        setNotificationMessage("Error in adding Menu");
-        setShowNotification(true);
-      }
-    } catch (err) {
-      console.error(err);
+    if (formData.get("menuName") === "" || formData.get("toppings").length === 0 || formData.get("price") === '' || formData.get("price") === null) {
       setMessageType("Error");
-      setNotificationMessage("An unexpected error occurred");
+      setNotificationMessage("Form data is empty");
       setShowNotification(true);
+    } else {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          console.log("No token found, please log in");
+          return;
+        }
+        const response = await fetch(
+          "http://localhost:8001/kitchen-manager/add/menu",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+          }
+        );
+        if (response.ok) {
+          setMessageType("Success");
+          setNotificationMessage("Menu Successfully Added");
+          setShowNotification(true);
+          setMenuData({ menuName: "", toppings: [], price: "", picture: null }); // Reset form
+        } else {
+          setMessageType("Error");
+          setNotificationMessage("Error in adding Menu");
+          setShowNotification(true);
+        }
+      } catch (err) {
+        setMessageType("Error");
+        setNotificationMessage("An unexpected error occurred");
+        setShowNotification(true);
+      }
     }
   };
 

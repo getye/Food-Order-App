@@ -14,9 +14,11 @@ describe('approve orders', () => {
         cy.url().should('eq', 'http://localhost:3000/kichen-manager/view/orders')
 
         cy.get('table').should('exist')
-        cy.get('button[aria-label="Go to last page"]').click()
 
-        cy.get('tr').contains('14:45 06/02/2025').click()
+        //goto the last page
+        cy.get('button[aria-label="Go to last page"]').click()
+        // click on the <tr> that contains this date
+        cy.get('tr').contains("Margherita").click()
 
         cy.get('#status').click()
         cy.get('li').contains('Preparing').click()
@@ -25,5 +27,9 @@ describe('approve orders', () => {
         cy.get('button[id="update"]').click()
         cy.get('[role="alert"').contains('Order Status Successfully Updated')
 
+        cy.get('button[aria-label="Go to last page"]').click()
+        cy.contains('td', "Margherita")             // Find the <td> with the date
+            .parent('tr')                           // Go up to its parent <tr>
+            .should('contain', 'Preparing')         // Check if that row contains 'Preparing'
     })
 })

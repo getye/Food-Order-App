@@ -45,4 +45,15 @@ describe('add menus', () => {
         cy.get('[role="alert"]').should('contain.text', 'Menu Successfully Added')
 
     })
+
+    it('shoud  not add a menu', () => {
+        cy.get('#add-menu').click()
+        cy.url().should('eq', 'http://localhost:3000/kichen-manager/add/menu')
+
+        // empty form data
+
+        cy.get('button[type="submit"]').click()
+        cy.get('[role="alert"]').should('contain.text', 'Form data is empty')
+
+    })
 })
